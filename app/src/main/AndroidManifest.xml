@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ELibrary">
         <activity
+            android:name=".book.BookReadActivity"
+            android:exported="false" />
+        <activity
             android:name=".book.BookDetailActivity"
             android:exported="false" />
         <activity

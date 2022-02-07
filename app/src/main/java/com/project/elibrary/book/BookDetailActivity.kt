@@ -12,6 +12,10 @@ class BookDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBookDetailBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+
+        binding?.backButton?.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     override fun onDestroy() {

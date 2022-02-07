@@ -14,6 +14,11 @@ class HomepageActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
 
+        checkRole()
+
+    }
+
+    private fun checkRole() {
 
     }
 
