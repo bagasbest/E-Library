@@ -2,13 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.elibrary">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ELibrary">
+        <activity
+            android:name=".book.BookDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".book.BookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".genre.GenreEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".genre.GenreAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomepageActivity"
+            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
