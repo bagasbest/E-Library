@@ -67,9 +67,12 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
     implementation 'com.github.Mamoon-Alhawamdeh:AmazingSpinner:1.1.0'
     implementation 'com.codesgood:justifiedtextview:1.1.0'
-    implementation 'com.vipulasri:ticketview:1.1.2'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+
+
+    /// PDF VIEWER
+    implementation 'com.github.barteksc:android-pdf-viewer:3.1.0-beta.1'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }

@@ -12,5 +12,6 @@ data class BookModel(
     var genre: String? = null,
     var description: String? = null,
     var image: String? = null,
+    var pdf: String? = null,
 
 ) : Parcelable

@@ -116,7 +116,7 @@
             app:layout_constraintTop_toBottomOf="@+id/readNow" />
 
         <com.codesgood.views.JustifiedTextView
-            android:id="@+id/tag_state_description"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16sp"
