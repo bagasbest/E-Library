@@ -21,7 +21,7 @@ class GenreViewModel : ViewModel(){
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         val model = GenreModel()
-                        model.genre = document.data["category"].toString()
+                        model.genre = document.data["genre"].toString()
                         model.uid = document.data["uid"].toString()
                         model.image = document.data["image"].toString()
 

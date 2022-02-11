@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
-
-
     }
 
 
@@ -66,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseFirestore
             .getInstance()
             .collection("users")
-            .whereEqualTo("username", username)
+            .whereEqualTo("name", username)
             .limit(1)
             .get()
             .addOnCompleteListener { task: Task<QuerySnapshot> ->

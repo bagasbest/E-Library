@@ -19,6 +19,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(private val binding: ItemBook2Binding)  : RecyclerView.ViewHolder(binding.root){
+        @SuppressLint("SetTextI18n")
         fun bind(model: BookModel) {
             with(binding) {
                 Glide.with(itemView.context)
@@ -26,10 +27,11 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
                     .into(image)
 
                 title.text = model.title
-                writer.text = model.writer
+                writer.text = "Oleh: ${model.writer}"
+                description.text = model.description
                 cv.setOnClickListener {
                     val intent = Intent(itemView.context, BookDetailActivity::class.java)
-                    intent.putExtra(BookDetailActivity.EXTRA_BOOK, model.genre)
+                    intent.putExtra(BookDetailActivity.EXTRA_BOOK, model)
                     itemView.context.startActivity(intent)
                 }
 

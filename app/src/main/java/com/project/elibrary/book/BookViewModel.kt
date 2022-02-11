@@ -24,7 +24,7 @@ class BookViewModel : ViewModel() {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         val model = BookModel()
-                        model.genre = document.data["category"].toString()
+                        model.genre = document.data["genre"].toString()
                         model.uid = document.data["uid"].toString()
                         model.image = document.data["image"].toString()
                         model.description = document.data["description"].toString()
@@ -56,7 +56,7 @@ class BookViewModel : ViewModel() {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         val model = BookModel()
-                        model.genre = document.data["category"].toString()
+                        model.genre = document.data["genre"].toString()
                         model.uid = document.data["uid"].toString()
                         model.image = document.data["image"].toString()
                         model.description = document.data["description"].toString()
@@ -88,7 +88,7 @@ class BookViewModel : ViewModel() {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         val model = BookModel()
-                        model.genre = document.data["category"].toString()
+                        model.genre = document.data["genre"].toString()
                         model.uid = document.data["uid"].toString()
                         model.image = document.data["image"].toString()
                         model.description = document.data["description"].toString()
@@ -120,7 +120,7 @@ class BookViewModel : ViewModel() {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         val model = BookModel()
-                        model.genre = document.data["category"].toString()
+                        model.genre = document.data["genre"].toString()
                         model.uid = document.data["uid"].toString()
                         model.image = document.data["image"].toString()
                         model.description = document.data["description"].toString()
@@ -153,7 +153,7 @@ class BookViewModel : ViewModel() {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         val model = BookModel()
-                        model.genre = document.data["category"].toString()
+                        model.genre = document.data["genre"].toString()
                         model.uid = document.data["uid"].toString()
                         model.image = document.data["image"].toString()
                         model.description = document.data["description"].toString()

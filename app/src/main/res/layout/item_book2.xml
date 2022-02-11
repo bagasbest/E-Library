@@ -26,6 +26,8 @@
             android:layout_height="70dp"
             android:scaleType="centerCrop"
             android:id="@+id/image"
+            app:riv_border_color="@color/blue_young"
+            app:riv_border_width="1dp"
             app:riv_corner_radius="10dp"
             android:src="@drawable/logo"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +61,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/avenir_regular"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:ellipsize="end"
+            android:text="Description"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/writer" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

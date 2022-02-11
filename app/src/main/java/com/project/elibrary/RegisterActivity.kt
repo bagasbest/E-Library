@@ -1,12 +1,15 @@
 package com.project.elibrary
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.himanshurawat.hasher.HashType
+import com.himanshurawat.hasher.Hasher
 import com.project.elibrary.databinding.ActivityRegisterBinding
 
 
@@ -51,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                             data["uid"] = uid
                             data["name"] = name
                             data["email"] = email
-                            data["password"] = password
+                            data["password"] = Hasher.hash(password, HashType.SHA_512)
                             data["role"] = "user"
                             FirebaseFirestore.getInstance()
                                 .collection("users")

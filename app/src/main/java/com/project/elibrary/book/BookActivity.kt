@@ -26,19 +26,18 @@ class BookActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         genre = intent.getStringExtra(EXTRA_GENRE)
-        if (genre != "all") {
+        if (genre != "Semua") {
             binding?.category?.text = genre
         }
         initRecyclerView()
         initViewModel("all")
+        checkRole(genre)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
-        checkRole(genre)
 
         binding?.search?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -94,7 +93,7 @@ class BookActivity : AppCompatActivity() {
 
         binding?.progressBar?.visibility = View.VISIBLE
 
-        if(genre == "all") {
+        if(genre == "Semua") {
             if (query == "all") {
                 viewModel.setListBookByAll()
             } else {
@@ -181,7 +180,7 @@ class BookActivity : AppCompatActivity() {
             .document(uid)
             .get()
             .addOnSuccessListener {
-                if (it.data?.get("role").toString() == "admin" && genre != "all") {
+                if (it.data?.get("role").toString() == "admin" && genre != "Semua") {
                     binding?.addBook?.visibility = View.VISIBLE
                     binding?.edit?.visibility = View.VISIBLE
                     binding?.delete?.visibility = View.VISIBLE

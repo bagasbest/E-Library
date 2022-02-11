@@ -16,7 +16,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:fontFamily="@font/avenir_bold"
-        android:text="Hai, Nama Lengkap!"
+        android:text="Hai,"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/logout"

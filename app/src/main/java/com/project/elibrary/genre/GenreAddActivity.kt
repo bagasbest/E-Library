@@ -127,6 +127,7 @@ class GenreAddActivity : AppCompatActivity() {
         mProgressDialog.setMessage("Mohon tunggu hingga proses selesai...")
         mProgressDialog.setCanceledOnTouchOutside(false)
         mProgressDialog.show()
+
         val imageFileName = "genre/image_" + System.currentTimeMillis() + ".png"
         mStorageRef.child(imageFileName).putFile(data!!)
             .addOnSuccessListener {

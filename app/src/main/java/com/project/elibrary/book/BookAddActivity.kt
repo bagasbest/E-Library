@@ -11,6 +11,7 @@ import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
@@ -51,9 +52,8 @@ class BookAddActivity : AppCompatActivity() {
             ImagePicker.with(this)
                 .galleryOnly()
                 .compress(1024)
-                .start(REQUEST_FROM_GALLERY)
+                .start(REQUEST_FROM_GALLERY);
         }
-
 
         binding?.uploadPdf?.setOnClickListener {
             pdfPickFromGallery()
@@ -81,7 +81,11 @@ class BookAddActivity : AppCompatActivity() {
                 Toast.makeText(this, "Cover buku tidak boleh kosong", Toast.LENGTH_SHORT).show()
             }
             pdfUri == null -> {
-                Toast.makeText(this, "Anda harus menambahkan buku berbentuk PDF", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Anda harus menambahkan buku berbentuk PDF",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             else -> {
 
@@ -91,10 +95,8 @@ class BookAddActivity : AppCompatActivity() {
                 mProgressDialog.setCanceledOnTouchOutside(false)
                 mProgressDialog.show()
 
-                val uid = System.currentTimeMillis().toString()
-
                 /// file path and name in firebase storage
-                val filePathAndName = "book/pdf$uid"
+                val filePathAndName = "pdf/file_" + System.currentTimeMillis() + ".pdf"
 
                 /// storage reference
                 val storageReference = FirebaseStorage.getInstance().getReference(filePathAndName)
@@ -111,6 +113,7 @@ class BookAddActivity : AppCompatActivity() {
                         if (uriTask.isSuccessful) {
                             // url of uploaded pdf is received
                             // now we can add pdf details to our firebase firestore
+                            val uid = System.currentTimeMillis().toString()
                             val pdfAdd: MutableMap<String, Any> = HashMap()
                             pdfAdd["title"] = title
                             pdfAdd["titleTemp"] = title.lowercase(Locale.getDefault())
@@ -174,7 +177,8 @@ class BookAddActivity : AppCompatActivity() {
                     try {
                         cursor = contentResolver.query(pdfUri!!, null, null, null, null)
                         if (cursor != null && cursor.moveToFirst()) {
-                            pdfName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                            pdfName =
+                                cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -183,8 +187,51 @@ class BookAddActivity : AppCompatActivity() {
                     pdfName = File(pdfUri.toString()).name
                 }
                 binding!!.titlePdf.text = pdfName
+            } else if (requestCode == REQUEST_FROM_GALLERY) {
+                uploadArticleDp(data?.data)
             }
         }
+    }
+
+    /// fungsi untuk mengupload foto kedalam cloud storage
+    private fun uploadArticleDp(data: Uri?) {
+        val mStorageRef = FirebaseStorage.getInstance().reference
+        val mProgressDialog = ProgressDialog(this)
+        mProgressDialog.setMessage("Mohon tunggu hingga proses selesai...")
+        mProgressDialog.setCanceledOnTouchOutside(false)
+        mProgressDialog.show()
+        val imageFileName = "book/image_" + System.currentTimeMillis() + ".png"
+        mStorageRef.child(imageFileName).putFile(data!!)
+            .addOnSuccessListener {
+                mStorageRef.child(imageFileName).downloadUrl
+                    .addOnSuccessListener { uri: Uri ->
+                        mProgressDialog.dismiss()
+                        dp = uri.toString()
+                        Glide
+                            .with(this)
+                            .load(dp)
+                            .into(binding!!.image)
+                    }
+                    .addOnFailureListener { e: Exception ->
+                        mProgressDialog.dismiss()
+                        Toast.makeText(
+                            this,
+                            "Gagal mengunggah gambar",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Log.d("imageDp: ", e.toString())
+                    }
+            }
+            .addOnFailureListener { e: Exception ->
+                mProgressDialog.dismiss()
+                Toast.makeText(
+                    this,
+                    "Gagal mengunggah gambar",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                Log.d("imageDp: ", e.toString())
+            }
     }
 
     private fun showSuccessDialog() {
@@ -204,7 +251,7 @@ class BookAddActivity : AppCompatActivity() {
             .setTitle("Gagal Mengunggah Buku Baru")
             .setMessage("Terdapat kesalahan ketika mengunggah buku baru, silahkan periksa koneksi internet anda, dan coba lagi nanti")
             .setIcon(R.drawable.ic_baseline_clear_24)
-            .setPositiveButton("OKE") { dialogInterface, _-> dialogInterface.dismiss() }
+            .setPositiveButton("OKE") { dialogInterface, _ -> dialogInterface.dismiss() }
             .show()
     }
 

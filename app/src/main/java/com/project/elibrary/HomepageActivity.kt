@@ -1,5 +1,6 @@
 package com.project.elibrary
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -99,6 +100,7 @@ class HomepageActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun checkRole() {
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
@@ -108,6 +110,8 @@ class HomepageActivity : AppCompatActivity() {
             .document(uid)
             .get()
             .addOnSuccessListener {
+                val name = it.data?.get("name").toString()
+                binding?.name?.text = "Hai,$name"
                 if (it.data?.get("role").toString() == "admin") {
                     binding?.addGenre?.visibility = View.VISIBLE
                 }
