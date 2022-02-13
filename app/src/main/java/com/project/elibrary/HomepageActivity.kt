@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.project.elibrary.databinding.ActivityHomepageBinding
 import android.content.Intent
+import android.net.Uri
 
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -48,6 +49,12 @@ class HomepageActivity : AppCompatActivity() {
 
         binding?.logout?.setOnClickListener {
             signOut()
+        }
+
+
+        binding?.web?.setOnClickListener {
+            val intent  = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.mdcalc.com/"))
+            startActivity(intent)
         }
 
     }
